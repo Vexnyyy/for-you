@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #ffe4e1, #ffc0cb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* VIDEO */
+video {
+  width: 160px;
+  max-width: 80%;
+  display: block;
+  margin: 0 auto 15px;
+  border-radius: 12px;
+}
+
+/* TEXT */
+h1 {
+  font-size: 22px;
+  color: #ff4d6d;
+  margin-bottom: 20px;
+}
+
+/* AREA TOMBOL */
+.btn-group {
+  position: relative;
+  height: 200px;
+}
+
+/* YES */
+#yesBtn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 18px;
+  width: 80%;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s;
+}
+
+/* NO */
+#noBtn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 18px;
+  width: 90%;
+
+  position: absolute;
+  top: 80px;
+  left: 5%;
+
+  transform: scale(1);
+}
+
+/* HATI */
+.heart {
+  position: fixed;
+  font-size: 20px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-100px); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
