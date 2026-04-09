@@ -1,73 +1,50 @@
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const title = document.getElementById("title");
-const video = document.getElementById("anime");
+const anime = document.getElementById("anime");
 
-let scale = 1;
-let noCount = 0;
+let yesSize = 1;
 
-function moveNo() {
-  const container = document.querySelector(".btn-group");
-
-  const maxX = container.offsetWidth - noBtn.offsetWidth;
-  const maxY = container.offsetHeight - noBtn.offsetHeight;
+// NO kabur (DIBATASI BIAR GA KELUAR LAYAR HP)
+noBtn.addEventListener("mouseover", () => {
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
 
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
 
+  noBtn.style.position = "fixed";
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 
-  scale += 0.15;
-  yesBtn.style.transform = `scale(${scale})`;
+  // YES membesar (TETAP PUNYA KAMU)
+  yesSize += 0.1;
+  yesBtn.style.transform = `scale(${yesSize})`;
 
-  const texts = [
-    "Yakin nggak? 😭",
-    "Jangan dong 😢",
-    "Pikir lagi 😭",
-    "Aku sedih loh 😭",
-    "Klik YES aja 😡"
-  ];
+  title.innerText = "Yakin nggak? 😭";
 
-  title.innerText = texts[Math.floor(Math.random() * texts.length)];
-
-  // 🔥 ganti video tiap NO ditekan
-  noCount++;
-
-  if (noCount === 1) {
-    video.src = "video/sedih.mp4";
-  } else if (noCount === 2) {
-    video.src = "video/sedih.mp4";
-  }
-
-  if (navigator.vibrate) {
-    navigator.vibrate(100);
-  }
-}
-
-noBtn.addEventListener("mouseover", moveNo);
-noBtn.addEventListener("click", moveNo);
-
-yesBtn.addEventListener("click", () => {
-  title.innerText = "I love you too ❤️";
-  noBtn.style.display = "none";
-  yesBtn.style.display = "none";
-
-  // 🔥 video happy
-  video.src = "video/jadi.mp4";
-
-  setInterval(createHeart, 200);
+  // GANTI VIDEO (TETAP PUNYA KAMU)
+  anime.innerHTML = '<source src="video/sedih.mp4" type="video/mp4">';
+  anime.load();
 });
 
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
+// YES klik (TETAP PUNYA KAMU)
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      flex-direction:column;
+      text-align:center;
+      padding:20px;
+    ">
+      <video autoplay loop muted playsinline style="width:200px;border-radius:16px;margin-bottom:20px;">
+        <source src="video/jadi.mp4" type="video/mp4">
+      </video>
 
-  heart.innerText = "❤️";
-  heart.style.left = Math.random() * window.innerWidth + "px";
-  heart.style.animationDuration = (2 + Math.random() * 3) + "s";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 4000);
-}
+      <h1 style="color:#ff4d6d;">I love you too ❤️</h1>
+    </div>
+  `;
+});
